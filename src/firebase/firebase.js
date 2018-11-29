@@ -11,6 +11,25 @@ const config = {
 
   firebase.initializeApp(config);
 
-  firebase.database().ref().set({
-    name: 'John Pawlak'
+  const database = firebase.database();
+
+  //ref gives us a reference to database (you can pass arg to ref to reference diff nodes for diff things users/etc/etc)
+  database.ref().set({
+    name: 'John Pawlak',
+    age: 26,
+    isSingle: true,
+    location: {
+        city: 'Toronto',
+        country: 'Canada'
+    }
   });
+//   database.ref().set('This is my data');
+// database.ref().set({ THIS WILL JUST OVERWRITE IT AGAIN LIKE THE LAST STRING
+//     age: 27
+// })
+database.ref('age').set(27)
+database.ref('location/city').set('Mississauga')
+database.ref('attributes').set({
+    height: '6feet',
+    weight: 190
+})
