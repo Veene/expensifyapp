@@ -22,14 +22,30 @@ const config = {
         city: 'Toronto',
         country: 'Canada'
     }
-  });
+  }).then(() => {
+      console.log('Data is saved')
+  }).catch((e) => {
+      console.log('error: ', e)
+  })
 //   database.ref().set('This is my data');
 // database.ref().set({ THIS WILL JUST OVERWRITE IT AGAIN LIKE THE LAST STRING
 //     age: 27
 // })
-database.ref('age').set(27)
-database.ref('location/city').set('Mississauga')
+// database.ref('age').set(27)
+// database.ref('location/city').set('Mississauga')
+
 database.ref('attributes').set({
     height: '6feet',
     weight: 190
+}).then(() => {
+    console.log('Data got saved,. second set call')
+}).catch((e) => {
+    console.log('error', e)
 })
+
+//remove
+// database.ref('isSingle')
+//     .set(null)
+//     .then(()=>{
+//         console.log('successfully removed')
+//     }).catch((e) => e)
