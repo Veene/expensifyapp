@@ -13,16 +13,45 @@ const config = {
 
   const database = firebase.database();
 
-  const notes = [{
-      id: '12',
-      title: 'first note',
-      body: 'this is my note'
-  }, {
-    id: '761ase',
-    title: 'another note',
-    body: 'this is my note'
-  }];
-  database.ref('notes').set(notes)
+  database.ref('expenses').on('child_removed', (snapshot) => {
+      console.log(snapshot.key, snapshot.val());
+  })
+  database.ref('expenses').on('child_changed', (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
+  })
+  database.ref('expenses').on('child_added', (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
+  })
+
+
+  //subscribed for any changes in expenses array and print arrays updated
+// database.ref('expenses')
+//   .on('value', (snapshot) => {
+//       const expenses = [];
+
+//       snapshot.forEach((childSnapshot) => {
+//           expenses.push({
+//               id: childSnapshot.key,
+//               ...childSnapshot.val()
+//           })
+//       })
+//       console.log(expenses)
+//   })
+  
+
+// database.ref('expenses').push({
+//     description: 'rent',
+//     note: '',
+//     createdAt: 7586725434,
+//     amount: 109500
+// })
+
+//   database.ref('notes/-LS_1-jr98WRutFvnY8r').remove();
+
+//   database.ref('notes').push({
+//       title: 'Course topics',
+//       body: 'React Native, Angular, Vue'
+//   })
 
 //   //need callback pattern now instead of promises because we want to subscribe to keep getting updates when change
 //   const onValueChange = database.ref().on('value', (snapshot) => {
