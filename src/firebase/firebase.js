@@ -7,21 +7,23 @@ const config = {
     projectId: "expensify-3b4ae",
     storageBucket: "expensify-3b4ae.appspot.com",
     messagingSenderId: "69387181752"
-  };
+};
 
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 
-  const database = firebase.database();
+const database = firebase.database();
 
-  database.ref('expenses').on('child_removed', (snapshot) => {
-      console.log(snapshot.key, snapshot.val());
-  })
-  database.ref('expenses').on('child_changed', (snapshot) => {
-    console.log(snapshot.key, snapshot.val());
-  })
-  database.ref('expenses').on('child_added', (snapshot) => {
-    console.log(snapshot.key, snapshot.val());
-  })
+export { firebase, database as default }
+
+// database.ref('expenses').on('child_removed', (snapshot) => {
+//     console.log(snapshot.key, snapshot.val());
+// })
+// database.ref('expenses').on('child_changed', (snapshot) => {
+//   console.log(snapshot.key, snapshot.val());
+// })
+// database.ref('expenses').on('child_added', (snapshot) => {
+//   console.log(snapshot.key, snapshot.val());
+// })
 
 
   //subscribed for any changes in expenses array and print arrays updated
