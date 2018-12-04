@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider, connect } from 'react-redux'
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
+import { startSetExpenses } from './actions/expenses';
 import { addExpense } from './actions/expenses';
 import { setTextFilter } from './actions/filters';
 import getVisibleExpenses from './selectors/expenses';
@@ -16,10 +17,10 @@ import './firebase/firebase';
 
 const store = configureStore();
 
-store.dispatch(addExpense({ description: 'Water bill', amount: 4500,createdAt:1001 }))
-store.dispatch(addExpense({ description: 'Gas bill', createdAt: 1000 }))
-store.dispatch(addExpense({ description: 'Rent', amount: 109500 }))
-console.log(store.getState())
+// store.dispatch(addExpense({ description: 'Water bill', amount: 4500,createdAt:1001 }))
+// store.dispatch(addExpense({ description: 'Gas bill', createdAt: 1000 }))
+// store.dispatch(addExpense({ description: 'Rent', amount: 109500 }))
+// console.log(store.getState())
 
 
 const state = store.getState()
@@ -32,8 +33,13 @@ const jsx = (
     </Provider>
 )
 
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
-ReactDOM.render(jsx, document.getElementById('app'))
+store.dispatch(startSetExpenses()).then(() => {
+    ReactDOM.render(jsx, document.getElementById('app'))
+})
+
+
 
 
 
