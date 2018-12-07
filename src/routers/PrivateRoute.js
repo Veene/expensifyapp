@@ -13,6 +13,7 @@ export const PrivateRoute = ({
         <Route {...rest} component={(props) => (
             isAuthenticated ? (
                 //the Component is the value taken from whichever component is being invoked by PrivateRoute on the AppRouter.js
+                //we also took Header out of AppRouter so that Signin page was empty with no Navlinks options
                 <div>
                     <Header />
                     <Component {...props}/>
